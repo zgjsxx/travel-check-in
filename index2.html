@@ -31,6 +31,27 @@
         <div class="main"></div>
     </div>
     <script>
+        var cityList = ['常州市',
+                        '无锡市',
+                        '南京市',
+                        '青岛市',
+                        '大连市',
+                        '威海市',
+                        '日照市',
+                        '苏州市',
+                        '重庆市',
+                        '北京市',
+                        '杭州市',
+                        '福州市',
+                        '成都市',
+                        '丽江市',
+                        '大理市',
+                        '昆明',
+                        '西安市',
+                        '合肥市',
+                        '滁州市',
+                        '扬州市',
+                        '黄山市'];
         // 获得地理数据的 url
         var chinaUrl = "china.json";
 
@@ -92,7 +113,11 @@
                         // 地图缩放比例
                         zoom: 1.2,
                         data:[
-                        {
+
+                    ]
+                    }]
+            };
+            var cityObjTemplate = {
                             name: '南京市',
                             value: 123,
                             itemStyle: {
@@ -103,9 +128,14 @@
                                     areaColor: '#1a75ff',
                                 }
                             }
-                        }]
-                    }]
-            };
+                        };
+
+            var i = 0,len = cityList.length;
+            for(;i < len; i++){
+                var cityObj = $.extend(true,{},cityObjTemplate);
+                cityObj.name = cityList[i];
+                option.series[0].data.push(cityObj);
+            }
             myChart.setOption(option);
         });
     </script>
