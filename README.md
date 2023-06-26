@@ -1,2 +1,1 @@
-# travel-check-in
-travel-check-in
+chrome.exe --allow-file-access-from-files

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>地图</title>
+    <style>
+        .container {
+            width: 1000px;
+            margin: 0 auto;
+        }
+
+        .container .title {
+            font-size: 28px;
+            font-weight: 300;
+            font-family: 'Microsoft YaHei';
+            text-align: center;
+        }
+
+        .container .main {
+            height: 900px;
+        }
+    </style>
+    <script src="./jquery.min.js"></script>
+    <script src="./echarts.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">旅游打卡</div>
+        <div class="main"></div>
+    </div>
+    <script>
+        // 获得地理数据的 url
+        var chinaUrl = "china.json";
+
+        var myChart = echarts.init(document.querySelector('.main'));
+        var globalOption;
+        $.get(chinaUrl, (json) => {
+            // 注册地图
+            echarts.registerMap('china', json);
+
+            var option = {
+                // 标题
+                title: {
+                    show: false
+                },
+
+                tooltip: {
+                    trigger: 'item'
+                },
+
+	            dataRange: {//左下角的颜色块。start：值域开始值；end：值域结束值；label：图例名称；color：自定义颜色值
+	                x: 'left',
+	                y: 'bottom',
+	                // splitList: [
+	                //     {start: 41, label: '> 41  极高', color: '#b80909'},
+	                //     {start: 30, end: 40, label: '31 - 40  高', color: '#e64546'},
+	                //     {start: 21, end: 30, label: '21 - 30  中', color: '#f57567'},
+	                //     {start: 11, end: 20, label: '11 - 20  低', color: '#ff9985'},
+	                //     {start:0, end: 10,label: '0 -10 无数据', color: '#ffe5db'}
+	                // ]
+	            },
+
+                // 地理坐标系组件
+                geo: {
+                    map: 'china',
+                    zoom: 1.2,
+
+                    label: {
+                        show: false
+                    },
+
+                    itemStyle: {
+                        areaColor: 'rgba(4,73,128, 1)',
+
+                        // 设置外层边框
+                        borderWidth: 2,
+                        borderColor: 'rgba(34,216,255, 1)',
+                        shadowColor: 'rgba(34,216,255, 1)', // #044B4D
+                    }
+                    
+                },
+                series: [
+                    {
+                        // 图表类型为地图
+                        type: 'map',
+
+                        // 使用 registerMap 注册的地图名称
+                        mapType: 'china',
+
+                        // 地图缩放比例
+                        zoom: 1.2,
+                        data:[
+                        {
+                            name: '南京市',
+                            value: 123,
+                            itemStyle: {
+                                normal: {
+                                    color: '#1a75ff',
+                                },
+                                emphasis: {
+                                    areaColor: '#1a75ff',
+                                }
+                            }
+                        }]
+                    }]
+            };
+            myChart.setOption(option);
+        });
+    </script>
+</body>
+
+</html>
