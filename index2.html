@@ -45,16 +45,19 @@
                         '福州市',
                         '成都市',
                         '丽江市',
-                        '大理市',
-                        '昆明',
+                        '大理白族自治州',
+                        '昆明市',
                         '西安市',
                         '合肥市',
                         '滁州市',
                         '扬州市',
-                        '黄山市'];
+                        '黄山市',
+                        '恩施土家族苗族自治州',
+                        '郑州市',
+                        '洛阳市'];
         // 获得地理数据的 url
-        var chinaUrl = "china.json";
-
+        // var chinaUrl = "china.json";
+        var chinaUrl = "https://raw.githubusercontent.com/zgjsxx/travel-check-in/main/china.json";
         var myChart = echarts.init(document.querySelector('.main'));
         var globalOption;
         $.get(chinaUrl, (json) => {
